@@ -14,13 +14,12 @@
 
 本次比赛的数据集包含了19-21赛季兵乓球国际比赛（世界杯、世锦赛、亚锦赛，奥运会）和国内比赛（全运会，乒超联赛）中标准单机位高清转播画面的特征信息，共包含912条视频特征文件，每个视频时长在0～6分钟不等，特征维度为2048，以pkl格式保存。我们对特征数据中面朝镜头的运动员的回合内挥拍动作进行了标注，单个动作时常在0～2秒不等，训练数据为729条标注视频，A测数据为91条视频，B测数据为92条视频，训练数据标签以json格式给出。
 
-本赛题中的数据包含912条ppTSM抽取的视频特征，特征保存为pkl格式，文件名对应视频名称，读取pkl之后以(num_of_frames, 2048)向量形式代表单个视频特征。其中num_of_frames是不固定的，同时数量也比较大，所以pkl的文件并不能直接用于训练。同时由于乒乓球每个动作时间非常短，为了可以让模型更好的识别动作，所以需要将数据进行分割。
+本赛题中的数据包含912条ppTSM抽取的视频特征，特征保存为pkl格式，文件名对应视频名称，读取pkl之后以(num_of_frames, 2048)向量形式代表单个视频特征。
 
 ### 思路介绍
 
-* 本赛题的视频数据帧数不固定，单个pkl文件包含的乒乓球动作数量也不固定，参考[BMN_tabletennis](https://github.com/PaddlePaddle/PaddleVideo/blob/develop/applications/TableTennis/get_instance_for_bmn.py)的数据分割方式，使用宽4s的滑窗,把每一个视频里的动作片段提取出来,分割为4X25=100帧的数据。
-* 本项目基于[BMN](https://github.com/PaddlePaddle/PaddleVideo/blob/develop/docs/zh-CN/model_zoo/localization/bmn.md)模型开发,借鉴[TVNet](https://arxiv.org/abs/2201.00434)中对TEM模块的改进思路，将TEM改成双分支融合后直接输出xs\xe的思路。
-* 改进了删除冗余proposal的策略，将原本的Soft-NMS改进为DIOU-soft-NMS，避免漏检。
+* 本赛题数据分割，参考[BMN_tabletennis](https://github.com/PaddlePaddle/PaddleVideo/blob/develop/applications/TableTennis/get_instance_for_bmn.py)的数据分割方式，使用宽4s的滑窗,把每一个视频里的动作片段提取出来,分割为4X25=100帧的数据。
+* 本项目基于[BMN]参考项目(https://aistudio.baidu.com/aistudio/projectdetail/3434130?channelType=0&channel=0)
 
 ### 具体方案分享
 
