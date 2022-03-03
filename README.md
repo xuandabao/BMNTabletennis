@@ -28,6 +28,6 @@
 
 BMN模型结构
 
-![image]https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9zS2lhMUZLRmlhZmdnZVhscThKWlhjRTRrbzBUWm05ZzgxZUhiSE5XN0VuUFNZZzFpYVJpYktQaFdkMTFNamdSOFJxR0tPSG5HRXc1NWYxSGliaWFWQTBYVGg2QS82NDA?x-oss-process=image/format,png)
+![image](https://imgconvert.csdnimg.cn/aHR0cHM6Ly9tbWJpei5xcGljLmNuL21tYml6X3BuZy9zS2lhMUZLRmlhZmdnZVhscThKWlhjRTRrbzBUWm05ZzgxZUhiSE5XN0VuUFNZZzFpYVJpYktQaFdkMTFNamdSOFJxR0tPSG5HRXc1NWYxSGliaWFWQTBYVGg2QS82NDA?x-oss-process=image/format,png)
 
 
