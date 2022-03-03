@@ -15,6 +15,7 @@
 本方案采用PaddleVideo中的BMN模型。BMN模型是百度自研，2019年ActivityNet夺冠方案，为视频动作定位问题中proposal的生成提供高效的解决方案，在PaddlePaddle上首次开源。此模型引入边界匹配(Boundary-Matching, BM)机制来评估proposal的置信度，按照proposal开始边界的位置及其长度将所有可能存在的proposal组合成一个二维的BM置信度图，图中每个点的数值代表其所对应的proposal的置信度分数。网络由三个模块组成，基础模块作为主干网络处理输入的特征序列，TEM模块预测每一个时序位置属于动作开始、动作结束的概率，PEM模块生成BM置信度图。
 
 本赛题中的数据包含912条ppTSM抽取的视频特征，特征保存为pkl格式，文件名对应视频名称，读取pkl之后以(num_of_frames, 2048)向量形式代表单个视频特征。其中num_of_frames是不固定的，同时数量也比较大，所以pkl的文件并不能直接用于训练。同时由于乒乓球每个动作时间非常短，为了可以让模型更好的识别动作，所以这里将数据进行分割。
+
 ### 思路介绍
 
 * 本赛题数据分割，参考[BMN_tabletennis](https://github.com/PaddlePaddle/PaddleVideo/blob/develop/applications/TableTennis/get_instance_for_bmn.py)的数据分割方式，使用宽4s的滑窗,把每一个视频里的动作片段提取出来,分割为4X25=100帧的数据。
