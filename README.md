@@ -24,30 +24,12 @@
 
 ### 具体方案分享
 
-1. 整体流程框图
+1. 数据预处理
 
-![image](https://user-images.githubusercontent.com/62683546/156315507-61598d4c-4b82-4741-a38d-343fd00245dd.png)
+设定滑动窗口（window）大小为4，当滑动窗口每次划过数组时，计算当前滑动窗口中元素的和，得到结果res
 
 2. BMN模型结构
 
 ![image](https://user-images.githubusercontent.com/62683546/156315582-dc4088df-47f0-4a66-b4f3-1dea80deedff.png)
 
-3. TEM模块改进
 
-![image](https://user-images.githubusercontent.com/62683546/156315667-4aed2caf-df77-4140-88bd-fd2fe39369b1.png)
-
-BMN中原本的TEM实现为两个分支单独进行xs和xe的预测，考虑到一个动作的起止互相是具有强关联性的，起始时间和终止时间的特征应该共同用于预测，因此改进后的TEM模块先通过两个分支分别提取起始时间和终止时间相关的特征，再将特征进行融合最后预测输出。
-
-4. DIOU-soft-NMS
-
-原本的Soft-NMS采用IOU来表示proposal的重叠程度以判断冗余性，而预测过程中可能出现强包含关系如下图所示:
-
-![image](https://user-images.githubusercontent.com/62683546/156315709-3888907e-0638-4187-b3ff-dca1c37627cf.png)
-
-p1与p2、p3具有相同的重叠度，但很明显p1与p2中心点重合大概率为同一动作的不同保守程度的估计，而p1与p3中心点偏离较大，可以认为是两个不同的动作。
-
-为了避免漏检p3这样的动作，本项目采用diou来替代iou进行非极大值抑制，diou的计算公式如下:
-
-![image](https://user-images.githubusercontent.com/62683546/156315777-e94e2a85-483f-47ba-906a-35848f062686.png)
-
-其中ρ(·)是两proposal中心点的欧几里得距离，c是覆盖两个proposal的最小时间长度。
